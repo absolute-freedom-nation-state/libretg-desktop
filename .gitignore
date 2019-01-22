@@ -65,4 +65,5 @@ stage
 /Telegram/Makefile
 *.*~
 
+# libretg stuff
 /scmignore
