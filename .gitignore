@@ -64,3 +64,5 @@ stage
 /Linux/
 /Telegram/Makefile
 *.*~
+
+/scmignore
