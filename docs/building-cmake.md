@@ -32,7 +32,7 @@ You can set the multithreaded make parameter by running
 
 Go to ***BuildPath*** and run
 
-    git clone --recursive https://github.com/telegramdesktop/tdesktop.git
+    git clone --recursive git@github.com:absolute-freedom-nation-state/libretg-desktop.git
 
     mkdir Libraries
     cd Libraries
