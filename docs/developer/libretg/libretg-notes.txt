@@ -1,0 +1,24 @@
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+
+Toolchain test builds; see https://wiki.ubuntu.com/ToolChain
+More info: https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test
+
+
+sudo add-apt-repository ppa:george-edison55/cmake-3.x
+
+Provides up to date builds of CMake 3.x (and related packages) for recent releases of Ubuntu. This currently includes:
+
+* 14.04 - Trusty Tahr
+* 15.10 - Wily Werewolf
+* 16.04 - Xenial Xerus
+
+All packages are built for i386, amd64, arm64, and armhf.
+
+These builds were created by taking the packages for CMake 3.x from Debian releases and backporting them and are considered stable.
+
+More info: https://launchpad.net/~george-edison55/+archive/ubuntu/cmake-3.x
+
+
+телеграм security guidelines. всякий стуфф про DH https://core.telegram.org/mtproto/security_guidelines
+Diffie—Hellman key exchange
+?? with error probability not exceeding one billionth
