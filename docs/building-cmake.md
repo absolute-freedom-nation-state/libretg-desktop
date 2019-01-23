@@ -121,7 +121,7 @@ Go to ***BuildPath*** and run
     git checkout v5.6.2
     cd qtimageformats && git checkout v5.6.2 && cd ..
     cd qtbase && git checkout v5.6.2 && cd ..
-    cd qtbase && git apply ../../../tdesktop/Telegram/Patches/qtbase_5_6_2.diff && cd ..
+    cd qtbase && git apply ../../../Telegram/Patches/qtbase_5_6_2.diff && cd ..
     cd qtbase/src/plugins/platforminputcontexts
     git clone https://github.com/telegramdesktop/fcitx.git
     git clone https://github.com/telegramdesktop/hime.git
