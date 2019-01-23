@@ -137,7 +137,7 @@ Go to ***BuildPath*** and run
     git clone https://chromium.googlesource.com/external/gyp
     cd gyp
     git checkout 702ac58e47
-    git apply ../../tdesktop/Telegram/Patches/gyp.diff
+    git apply ../../Telegram/Patches/gyp.diff
     cd ..
 
     git clone https://chromium.googlesource.com/breakpad/breakpad
