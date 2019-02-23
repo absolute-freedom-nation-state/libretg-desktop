@@ -16,12 +16,14 @@ extern "C" {
 #include <openssl/aes.h>
 } // extern "C"
 
+#include <crl/crl.h>
+
 namespace MTP {
 namespace {
 
 struct DnsEntry {
 	QString data;
-	int64 TTL = 0;
+	crl::time TTL = 0;
 };
 
 constexpr auto kSendNextTimeout = crl::time(1000);
@@ -155,8 +157,8 @@ std::vector<DnsEntry> ParseDnsResponse(
 
 		const auto ttlIt = object.find(qsl("TTL"));
 		const auto ttl = (ttlIt != object.constEnd())
-			? int64(std::round((*ttlIt).toDouble()))
-			: int64(0);
+			? crl::time(std::round((*ttlIt).toDouble()))
+			: crl::time(0);
 		result.push_back({ (*dataIt).toString(), ttl });
 	}
 	return result;

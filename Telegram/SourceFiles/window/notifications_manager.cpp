@@ -214,7 +214,7 @@ void System::checkDelayed() {
 void System::showNext() {
 	if (App::quitting()) return;
 
-	auto ms = crl::now(), nextAlert = 0LL;
+	auto ms = crl::now(), nextAlert = 0L;
 	bool alert = false;
 	int32 now = unixtime();
 	for (auto i = _whenAlerts.begin(); i != _whenAlerts.end();) {

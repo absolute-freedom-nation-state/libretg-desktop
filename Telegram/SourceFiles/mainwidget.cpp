@@ -3315,7 +3315,7 @@ bool MainWidget::failDifference(const RPCError &error) {
 }
 
 void MainWidget::getDifferenceByPts() {
-	auto now = crl::now(), wait = 0LL;
+	auto now = crl::now(), wait = 0L;
 	if (_getDifferenceTimeByPts) {
 		if (_getDifferenceTimeByPts > now) {
 			wait = _getDifferenceTimeByPts - now;
@@ -3340,7 +3340,7 @@ void MainWidget::getDifferenceByPts() {
 }
 
 void MainWidget::getDifferenceAfterFail() {
-	auto now = crl::now(), wait = 0LL;
+	auto now = crl::now(), wait = 0L;
 	if (_getDifferenceTimeAfterFail) {
 		if (_getDifferenceTimeAfterFail > now) {
 			wait = _getDifferenceTimeAfterFail - now;

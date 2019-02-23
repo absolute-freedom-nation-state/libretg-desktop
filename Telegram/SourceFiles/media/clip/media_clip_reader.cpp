@@ -761,7 +761,7 @@ void Manager::process() {
 	_processingInThread = thread();
 
 	bool checkAllReaders = false;
-	auto ms = crl::now(), minms = ms + 86400 * 1000LL;
+	auto ms = crl::now(), minms = ms + 86400 * 1000L;
 	{
 		QMutexLocker lock(&_readerPointersMutex);
 		for (auto it = _readerPointers.begin(), e = _readerPointers.end(); it != e; ++it) {
@@ -863,7 +863,7 @@ FileMediaInformation::Video PrepareForSending(const QString &fname, const QByteA
 	auto localLocation = FileLocation(fname);
 	auto localData = QByteArray(data);
 
-	auto seekPositionMs = 0LL;
+	auto seekPositionMs = 0L;
 	auto reader = std::make_unique<internal::FFMpegReaderImplementation>(&localLocation, &localData, AudioMsgId());
 	if (reader->start(internal::ReaderImplementation::Mode::Inspecting, seekPositionMs)) {
 		auto durationMs = reader->durationMs();

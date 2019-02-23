@@ -59,6 +59,7 @@ Images::Options VideoThumbOptions(not_null<DocumentData*> document) {
 
 } // namespace
 
+#ifndef D1
 struct OverlayWidget::SharedMedia {
 	SharedMedia(SharedMediaKey key) : key(key) {
 	}
@@ -82,8 +83,10 @@ struct OverlayWidget::Collage {
 	CollageKey key;
 };
 
+#endif //D1
 OverlayWidget::OverlayWidget()
 : OverlayParent(nullptr)
+#ifndef D1
 , _transparentBrush(style::transparentPlaceholderBrush())
 , _animStarted(crl::now())
 , _docDownload(this, lang(lng_media_download), st::mediaviewFileLink)
@@ -94,6 +97,10 @@ OverlayWidget::OverlayWidget()
 , _a_state(animation(this, &OverlayWidget::step_state))
 , _dropdown(this, st::mediaviewDropdownMenu)
 , _dropdownShowTimer(this) {
+#else //D1
+{
+#endif //D1
+#ifndef D1
 	subscribe(Lang::Current().updated(), [this] { refreshLang(); });
 
 	setWindowIcon(Window::CreateIcon());
@@ -176,8 +183,10 @@ OverlayWidget::OverlayWidget()
 	_dropdown->setHiddenCallback([this] { dropdownHidden(); });
 	_dropdownShowTimer->setSingleShot(true);
 	connect(_dropdownShowTimer, SIGNAL(timeout()), this, SLOT(onDropdown()));
+#endif //D1
 }
 
+#ifndef D1
 void OverlayWidget::refreshLang() {
 	InvokeQueued(this, [this] { updateThemePreviewGeometry(); });
 }
@@ -711,7 +720,9 @@ void OverlayWidget::zoomUpdate(int32 &newZoom) {
 	setZoomLevel(newZoom);
 }
 
+#endif //D1
 void OverlayWidget::clearData() {
+#ifndef D1
 	if (!isHidden()) {
 		hide();
 	}
@@ -729,12 +740,16 @@ void OverlayWidget::clearData() {
 	_doc = nullptr;
 	_fullScreenVideo = false;
 	_caption.clear();
+#endif //D1
 }
 
 OverlayWidget::~OverlayWidget() {
+#ifndef D1
 	delete base::take(_menu);
+#endif //D1
 }
 
+#ifndef D1
 void OverlayWidget::clickHandlerActiveChanged(const ClickHandlerPtr &p, bool active) {
 	setCursor((active || ClickHandler::getPressed()) ? style::cur_pointer : style::cur_default);
 	update(QRegion(_saveMsg) + _captionRect);
@@ -975,10 +990,16 @@ void OverlayWidget::clipCallback(Media::Clip::Notification notification) {
 	}
 }
 
+#endif //D1
 PeerData *OverlayWidget::ui_getPeerForMouseAction() {
+#ifndef D1
 	return _history ? _history->peer.get() : nullptr;
+#else //D1
+	return nullptr;
+#endif //D1
 }
 
+#ifndef D1
 void OverlayWidget::onDownload() {
 	if (Global::AskDownloadPath()) {
 		return onSaveAs();
@@ -1463,7 +1484,9 @@ void OverlayWidget::initGroupThumbs() {
 		height() - _groupThumbsTop);
 }
 
+#endif //D1
 void OverlayWidget::showPhoto(not_null<PhotoData*> photo, HistoryItem *context) {
+#ifndef D1
 	if (context) {
 		setContext(context);
 	} else {
@@ -1490,9 +1513,11 @@ void OverlayWidget::showPhoto(not_null<PhotoData*> photo, HistoryItem *context) 
 	displayPhoto(photo, context);
 	preloadData(0);
 	activateControls();
+#endif //D1
 }
 
 void OverlayWidget::showPhoto(not_null<PhotoData*> photo, not_null<PeerData*> context) {
+#ifndef D1
 	setContext(context);
 
 	_firstOpenedPeerPhoto = true;
@@ -1513,9 +1538,11 @@ void OverlayWidget::showPhoto(not_null<PhotoData*> photo, not_null<PeerData*> co
 	displayPhoto(photo, 0);
 	preloadData(0);
 	activateControls();
+#endif //D1
 }
 
 void OverlayWidget::showDocument(not_null<DocumentData*> document, HistoryItem *context) {
+#ifndef D1
 	if (context) {
 		setContext(context);
 	} else {
@@ -1541,8 +1568,10 @@ void OverlayWidget::showDocument(not_null<DocumentData*> document, HistoryItem *
 	displayDocument(document, context);
 	preloadData(0);
 	activateControls();
+#endif //D1
 }
 
+#ifndef D1
 void OverlayWidget::displayPhoto(not_null<PhotoData*> photo, HistoryItem *item) {
 	if (photo->isNull()) {
 		displayDocument(nullptr, item);
@@ -3322,5 +3351,6 @@ float64 OverlayWidget::overLevel(OverState control) const {
 	return (i == _animOpacities.cend()) ? (_over == control ? 1 : 0) : i->current();
 }
 
+#endif //D1
 } // namespace View
 } // namespace Media

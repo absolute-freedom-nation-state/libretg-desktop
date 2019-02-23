@@ -198,12 +198,12 @@ crl::time FFMpegReaderImplementation::frameRealTime() const {
 }
 
 crl::time FFMpegReaderImplementation::framePresentationTime() const {
-	return qMax(_frameTime + _frameTimeCorrection, 0LL);
+	return qMax(_frameTime + _frameTimeCorrection, 0L);
 }
 
 crl::time FFMpegReaderImplementation::durationMs() const {
 	if (_fmtContext->streams[_streamId]->duration == AV_NOPTS_VALUE) return 0;
-	return (_fmtContext->streams[_streamId]->duration * 1000LL * _fmtContext->streams[_streamId]->time_base.num) / _fmtContext->streams[_streamId]->time_base.den;
+	return (_fmtContext->streams[_streamId]->duration * 1000L * _fmtContext->streams[_streamId]->time_base.num) / _fmtContext->streams[_streamId]->time_base.den;
 }
 
 bool FFMpegReaderImplementation::renderFrame(QImage &to, bool &hasAlpha, const QSize &size) {

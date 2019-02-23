@@ -48,8 +48,12 @@ using OverlayParent = Ui::RpWidgetWrap<QOpenGLWidget>;
 using OverlayParent = Ui::RpWidget;
 #endif // Q_OS_MAC && !OS_MAC_OLD
 
+//hypn #define D1 (1)
+
 class OverlayWidget final : public OverlayParent, private base::Subscriber, public ClickHandlerHost {
+#if 1 //hypn
 	Q_OBJECT
+#endif
 
 public:
 	OverlayWidget();
@@ -57,6 +61,7 @@ public:
 	void showPhoto(not_null<PhotoData*> photo, HistoryItem *context);
 	void showPhoto(not_null<PhotoData*> photo, not_null<PeerData*> context);
 	void showDocument(not_null<DocumentData*> document, HistoryItem *context);
+#ifndef D1
 
 	void leaveToChildEvent(QEvent *e, QWidget *child) override { // e -- from enterEvent() of child TWidget
 		updateOverState(OverNone);
@@ -71,11 +76,13 @@ public:
 	void onDocClick();
 
 	void clipCallback(Media::Clip::Notification notification);
+#endif //D1
 	PeerData *ui_getPeerForMouseAction();
 
 	void clearData();
 
 	~OverlayWidget();
+#ifndef D1
 
 	// ClickHandlerHost interface
 	void clickHandlerActiveChanged(const ClickHandlerPtr &p, bool active) override;
@@ -418,7 +425,7 @@ private:
 	object_ptr<Ui::RoundButton> _themeCancel = { nullptr };
 
 	bool _wasRepainted = false;
-
+#endif //D1
 };
 
 } // namespace View
